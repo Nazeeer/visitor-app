@@ -11,6 +11,7 @@ import * as yup from "yup";
 import MyInput from "./MyInput";
 import MyButton from "./MyButton";
 import { useNavigate } from "react-router-dom";
+import { Bounce, toast, ToastContainer } from "react-toastify";
 
 const phoneRegExp = /^01[1250][0-9]{8}$/;
 
@@ -21,21 +22,12 @@ const checkoutSchema = yup.object().shape({
     .matches(phoneRegExp, "رقم الهاتف غير صحيح")
     .required("رقم الهاتف مطلوب"),
   building: yup.string().required("المبنى مطلوب"),
-  office: yup.string().required("المكتب مطلوب"),
-  from: yup.string().required("الجهة مطلوبة"),
-  reason: yup.string().required("السبب مطلوب"),
-  comment: yup.string(),
 });
 
 const initialValues = {
   name: "",
   phoneNumber: "",
   building: "",
-  office: "",
-  from: "",
-  reason: "",
-  rating: 0,
-  comment: "",
 };
 
 const VisitorForm = ({ updateUser }) => {
@@ -44,9 +36,20 @@ const VisitorForm = ({ updateUser }) => {
   );
   const navigate = useNavigate();
 
-  const handleFormSubmit = (values) => {
+  const handleFormSubmit = (values, { resetForm }) => {
     console.log(values);
-    navigate('/admin/managevisitors', { replace: true });
+    toast.success("تم اضافة الزائر بنجاح", {
+      position: "top-right",
+      autoClose: 4000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+      transition: Bounce,
+    });
+    resetForm();
   };
 
   return (
@@ -77,6 +80,7 @@ const VisitorForm = ({ updateUser }) => {
             }}
             onSubmit={handleSubmit}
           >
+            <ToastContainer />
             <MyInput
               id="visitor-name"
               placeholder="اسم الزائر"
@@ -129,7 +133,9 @@ const VisitorForm = ({ updateUser }) => {
               )}
             </FormControl>
 
-            <MyButton type="submit">تاكيد</MyButton>
+            <MyButton onClick={handleSubmit} type="submit">
+              تاكيد
+            </MyButton>
           </Stack>
         )}
       </Formik>

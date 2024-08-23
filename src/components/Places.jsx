@@ -312,7 +312,18 @@ export default function Places() {
 
           {/* <CreatablePlaces/>
           <CreatablePlaces/> */}
-          <Button variant="contained" startIcon={<DomainAdd />}>
+          <Button
+            variant="contained"
+            startIcon={<DomainAdd />}
+            sx={{
+              backgroundColor: "#FFC100",
+              boxShadow: "none",
+              "&:hover": {
+                backgroundColor: "#FFD700",
+                boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
+              },
+            }}
+          >
             اضافه
           </Button>
         </Stack>

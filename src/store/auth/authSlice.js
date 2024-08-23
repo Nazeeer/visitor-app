@@ -7,8 +7,8 @@ const token = Cookies.get("token");
 
 const initialState = {
   isAuth: Boolean(token) || true,
-  role: "ROLE_ADMIN",
-  // role: "ROLE_USER",
+  // role: "ROLE_ADMIN",
+  role: "ROLE_USER",
   isLoading: false,
   error: null,
 };

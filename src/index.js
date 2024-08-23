@@ -8,8 +8,9 @@ import rtlPlugin from "stylis-plugin-rtl";
 import { prefixer } from "stylis";
 import store from "./store";
 import App from "./App";
+import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
- 
+
 const defaultTheme = createTheme({
   direction: "rtl",
   palette: {

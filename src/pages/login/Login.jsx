@@ -8,7 +8,7 @@ import Footer from "../../components/Footer";
 import FoeLogoBlack from "../../assets/bro.svg";
 import styles from "./login.module.css";
 import MyInput from "../../components/MyInput";
-
+import { Bounce, toast, ToastContainer } from "react-toastify";
 const checkoutSchema = yup.object().shape({
   username: yup.string().required("اسم المستخدم مطلوب"),
   password: yup.string().required("كلمة المرور مطلوبة"),
@@ -30,9 +30,23 @@ const Login = () => {
     mainPath = "/user";
   }
 
-  const handleFormSubmit = (values) => {
+  const handleFormSubmit = (values, { resetForm }) => {
     console.log(values);
-    navigate(`${mainPath}/managevisitors`, { replace: true });
+    toast.success("تم تسجيل الدخول بنجاح", {
+      position: "top-right",
+      autoClose: 4000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+      transition: Bounce,
+    });
+    resetForm();
+    setTimeout(() => {
+      navigate(`${mainPath}`, { replace: true });
+    }, 4000);
   };
 
   return (
@@ -45,6 +59,7 @@ const Login = () => {
         justifyContent: "space-between",
       }}
     >
+      <ToastContainer />
       <Box
         sx={{
           display: "flex",
